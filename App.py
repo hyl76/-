@@ -155,7 +155,7 @@ with st.form("prediction_form"):
 
         # 使用最佳截断值0.1992进行预测
         risk_prob = probability[0][1]
-        optimal_threshold = 0.1992
+        optimal_threshold = 0.5
         
         if risk_prob >= optimal_threshold:
             st.error("预测结果：肺癌高风险")
