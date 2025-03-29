@@ -166,64 +166,64 @@ with st.form("prediction_form"):
             st.success("预测结果：肺癌低风险")
             st.write(f"**风险概率：{risk_prob:.1%}**")
             
-        # 添加主要影响因素分析
-        st.markdown("---")
-        st.subheader("主要影响因素")
+        # # 添加主要影响因素分析
+        # st.markdown("---")
+        # st.subheader("主要影响因素")
         
-        # 计算SHAP值
-        explainer = shap.TreeExplainer(model)
-        shap_values = explainer.shap_values(input_data)
+        # # 计算SHAP值
+        # explainer = shap.TreeExplainer(model)
+        # shap_values = explainer.shap_values(input_data)
         
-        # 特征名称列表
-        feature_names = [
-            "性别", "年龄", "文化程度", "职业暴露", 
-            "新鲜蔬菜", "新鲜水果", "畜肉", "粗粮",
-            "口味", "油脂", "腌晒食品", "空气污染",
-            "吸烟状况", "室内吸烟", "饮酒频率", "饮茶频率",
-            "体育锻炼", "做饭油烟", "肺结核", "慢性支气管炎",
-            "肺气肿", "肺癌家族史"
-        ]
+        # # 特征名称列表
+        # feature_names = [
+        #     "性别", "年龄", "文化程度", "职业暴露", 
+        #     "新鲜蔬菜", "新鲜水果", "畜肉", "粗粮",
+        #     "口味", "油脂", "腌晒食品", "空气污染",
+        #     "吸烟状况", "室内吸烟", "饮酒频率", "饮茶频率",
+        #     "体育锻炼", "做饭油烟", "肺结核", "慢性支气管炎",
+        #     "肺气肿", "肺癌家族史"
+        # ]
         
-        # 获取SHAP值
-        shap_vals = shap_values[1][0] if isinstance(shap_values, list) else shap_values[0]
+        # # 获取SHAP值
+        # shap_vals = shap_values[1][0] if isinstance(shap_values, list) else shap_values[0]
         
-        # 获取前5个最重要的特征及其影响
-        feature_importance = [(abs(val), name, val) for val, name in zip(shap_vals, feature_names)]
-        top_features = sorted(feature_importance, reverse=True)[:5]
+        # # 获取前5个最重要的特征及其影响
+        # feature_importance = [(abs(val), name, val) for val, name in zip(shap_vals, feature_names)]
+        # top_features = sorted(feature_importance, reverse=True)[:5]
         
-        # 创建选项值的映射字典
-        value_mapping = {
-            "性别": "女" if gender == 0 else "男",
-            "年龄": {0:"40-49岁", 1:"50-54岁", 2:"55-59岁", 3:"60-64岁", 4:"65-69岁", 5:"70-74岁"}[age],
-            "文化程度": {1:"未受教育", 2:"小学", 3:"初中", 4:"高中/中专/技校", 5:"大专", 6:"大学及以上"}[education],
-            "职业暴露": "否" if occupation == 0 else "是",
-            "新鲜蔬菜": {0:"从不", 1:"<5斤/周", 2:"≥5斤/周"}[vegetables],
-            "新鲜水果": {0:"从不", 1:"<2.5斤/周", 2:"≥2.5斤/周"}[fruits],
-            "畜肉": {0:"从不", 1:"≤7两/周", 2:">7两/周"}[meat],
-            "粗粮": {0:"从不", 1:"<1斤/周", 2:"≥1斤/周"}[grains],
-            "口味": {1:"重盐", 2:"适中", 3:"清淡"}[taste],
-            "油脂": {1:"较高", 2:"适中", 3:"较低"}[oil],
-            "腌晒食品": {1:"从不", 2:"有时", 3:"经常"}[preserved_food],
-            "空气污染": "否" if air_pollution == 0 else "是",
-            "吸烟状况": {0:"从不吸", 1:"目前仍在吸", 2:"目前已戒烟"}[smoking],
-            "室内吸烟": "否" if indoor_smoking == 0 else "是",
-            "饮酒频率": {0:"从不饮", 1:"目前仍常饮", 2:"目前已戒酒"}[drinking],
-            "饮茶频率": {0:"从不饮", 1:"目前仍常饮", 2:"目前不常饮"}[tea],
-            "体育锻炼": "否" if exercise == 0 else "是",
-            "做饭油烟": {1:"无烟", 2:"少许", 3:"较多", 4:"很多"}[cooking_fume],
-            "肺结核": "否" if tuberculosis == 0 else "是",
-            "慢性支气管炎": "否" if bronchitis == 0 else "是",
-            "肺气肿": "否" if emphysema == 0 else "是",
-            "肺癌家族史": "否" if family_history == 0 else "是"
-        }
+        # # 创建选项值的映射字典
+        # value_mapping = {
+        #     "性别": "女" if gender == 0 else "男",
+        #     "年龄": {0:"40-49岁", 1:"50-54岁", 2:"55-59岁", 3:"60-64岁", 4:"65-69岁", 5:"70-74岁"}[age],
+        #     "文化程度": {1:"未受教育", 2:"小学", 3:"初中", 4:"高中/中专/技校", 5:"大专", 6:"大学及以上"}[education],
+        #     "职业暴露": "否" if occupation == 0 else "是",
+        #     "新鲜蔬菜": {0:"从不", 1:"<5斤/周", 2:"≥5斤/周"}[vegetables],
+        #     "新鲜水果": {0:"从不", 1:"<2.5斤/周", 2:"≥2.5斤/周"}[fruits],
+        #     "畜肉": {0:"从不", 1:"≤7两/周", 2:">7两/周"}[meat],
+        #     "粗粮": {0:"从不", 1:"<1斤/周", 2:"≥1斤/周"}[grains],
+        #     "口味": {1:"重盐", 2:"适中", 3:"清淡"}[taste],
+        #     "油脂": {1:"较高", 2:"适中", 3:"较低"}[oil],
+        #     "腌晒食品": {1:"从不", 2:"有时", 3:"经常"}[preserved_food],
+        #     "空气污染": "否" if air_pollution == 0 else "是",
+        #     "吸烟状况": {0:"从不吸", 1:"目前仍在吸", 2:"目前已戒烟"}[smoking],
+        #     "室内吸烟": "否" if indoor_smoking == 0 else "是",
+        #     "饮酒频率": {0:"从不饮", 1:"目前仍常饮", 2:"目前已戒酒"}[drinking],
+        #     "饮茶频率": {0:"从不饮", 1:"目前仍常饮", 2:"目前不常饮"}[tea],
+        #     "体育锻炼": "否" if exercise == 0 else "是",
+        #     "做饭油烟": {1:"无烟", 2:"少许", 3:"较多", 4:"很多"}[cooking_fume],
+        #     "肺结核": "否" if tuberculosis == 0 else "是",
+        #     "慢性支气管炎": "否" if bronchitis == 0 else "是",
+        #     "肺气肿": "否" if emphysema == 0 else "是",
+        #     "肺癌家族史": "否" if family_history == 0 else "是"
+        # }
         
-        # 显示主要影响因素
-        for abs_val, name, val in top_features:
-            impact = "增加" if val > 0 else "降低"
-            selected_value = value_mapping[name]
-            st.write(f"• {name}（{selected_value}）: {impact}风险 ({abs(val):.4f})")
+        # # 显示主要影响因素
+        # for abs_val, name, val in top_features:
+        #     impact = "增加" if val > 0 else "降低"
+        #     selected_value = value_mapping[name]
+        #     st.write(f"• {name}（{selected_value}）: {impact}风险 ({abs(val):.4f})")
             
-        st.info("注：以上显示了对预测结果影响最大的5个因素，正值表示增加风险，负值表示降低风险。")
+        # st.info("注：以上显示了对预测结果影响最大的5个因素，正值表示增加风险，负值表示降低风险。")
 
 
 # 侧边栏信息
