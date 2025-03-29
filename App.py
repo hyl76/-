@@ -160,11 +160,11 @@ with st.form("prediction_form"):
         optimal_threshold = 0.1992
         
         if risk_prob >= optimal_threshold:
-            st.markdown("<h3 style='color: #ff4b4b;'>预测结果：肺癌高风险</h3>", unsafe_allow_html=True)
-            st.write(f"**风险概率：{risk_prob:.1%}**")
+            st.error("# 预测结果：肺癌高风险")
+            st.markdown(f"## **风险概率：{risk_prob:.1%}**")
         else:
-            st.markdown("<h3 style='color: #00cc00;'>预测结果：肺癌低风险</h3>", unsafe_allow_html=True)
-            st.write(f"**风险概率：{risk_prob:.1%}**")
+            st.success("# 预测结果：肺癌低风险")
+            st.markdown(f"## **风险概率：{risk_prob:.1%}**")
             
         # # 添加主要影响因素分析
         # st.markdown("---")
