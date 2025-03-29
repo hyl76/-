@@ -160,10 +160,10 @@ with st.form("prediction_form"):
         optimal_threshold = 0.1992
         
         if risk_prob >= optimal_threshold:
-            st.error("# 预测结果：肺癌高风险")
+            st.error("# 预测结果：肺癌高风险人群")
             st.markdown(f"## **风险概率：{risk_prob:.1%}**")
         else:
-            st.success("# 预测结果：肺癌低风险")
+            st.success("# 预测结果：肺癌低风险人群")
             st.markdown(f"## **风险概率：{risk_prob:.1%}**")
             
         # # 添加主要影响因素分析
