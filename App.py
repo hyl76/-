@@ -154,7 +154,7 @@ with st.form("prediction_form"):
         probability = model.predict_proba(input_data)
 
         st.markdown("---")
-        st.subheader("预测结果")
+        # st.subheader("预测结果")
 
         risk_prob = probability[0][1]
         optimal_threshold = 0.1992
